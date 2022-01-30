@@ -20,4 +20,14 @@ public class MyConfigurationBean {
     public MyBeanWithDependency beanOperationSumReturnWithDependency(MyOperation myOperation){
         return new MyBeanWithDependencyImplement(myOperation);
     }
+
+    @Bean
+    public ExerciceDependency beanSaludo(){
+        return new ExeciceDependencyImplement();
+    }
+
+    @Bean
+    public ExercicePrintWithDependencyImplement exerciceDependencyprint(ExerciceDependency exerciceDependency){
+        return new ExercicePrintWithDependencyImplement(exerciceDependency);
+    }
 }

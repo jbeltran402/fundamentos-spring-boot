@@ -14,4 +14,5 @@ public class MyBeanWithDependencyImplement implements MyBeanWithDependency{
         System.out.println("Hola desde la implementacion de un bean con dependencia \n" +
                 "Este el es resultado de la suma : "+ myOperation.sum(number));
     }
+
 }
