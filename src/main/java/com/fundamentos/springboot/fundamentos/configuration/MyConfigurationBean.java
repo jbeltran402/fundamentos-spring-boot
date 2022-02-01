@@ -1,6 +1,7 @@
 package com.fundamentos.springboot.fundamentos.configuration;
 
 import com.fundamentos.springboot.fundamentos.bean.*;
+import com.fundamentos.springboot.fundamentos.pojo.UserPojo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,7 +28,7 @@ public class MyConfigurationBean {
     }
 
     @Bean
-    public ExercicePrintWithDependencyImplement exerciceDependencyprint(ExerciceDependency exerciceDependency){
-        return new ExercicePrintWithDependencyImplement(exerciceDependency);
+    public ExercicePrintWithDependencyImplement exerciceDependencyprint(ExerciceDependency exerciceDependency, UserPojo userPojo){
+        return new ExercicePrintWithDependencyImplement(exerciceDependency, userPojo);
     }
 }

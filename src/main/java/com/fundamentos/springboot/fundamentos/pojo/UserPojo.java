@@ -2,7 +2,6 @@ package com.fundamentos.springboot.fundamentos.pojo;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
-import org.springframework.context.annotation.Configuration;
 
 @ConstructorBinding
 @ConfigurationProperties(prefix = "user")
@@ -10,11 +9,13 @@ public class UserPojo {
     private String email;
     private String password;
     private int age;
+    private String nombre;
 
-    public UserPojo(String email, String password, int age) {
+    public UserPojo(String email, String password, int age, String nombre) {
         this.email = email;
         this.password = password;
         this.age = age;
+        this.nombre = nombre;
     }
 
     public String getEmail() {
@@ -39,5 +40,13 @@ public class UserPojo {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

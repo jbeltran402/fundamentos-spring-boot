@@ -47,6 +47,8 @@ public class FundamentosApplication implements CommandLineRunner {
         exercicePrintWithDependencyImplement.PrintExerciceDependency();
         System.out.println(myBeanWithProperties.function());
         System.out.println(userPojo.getEmail());
+            LOGGER.debug("La variable Email Contiene :" + userPojo.getEmail());
+
         try {
             int VariableError = 10 / 0;
             LOGGER.debug("El resultado es :" + VariableError);
