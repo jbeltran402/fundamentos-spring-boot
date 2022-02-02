@@ -3,23 +3,22 @@ package com.fundamentos.springboot.fundamentos.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_user", nullable = false, unique = false)
+    @Column(name = "id_user", nullable = false, unique = true)
     private Long id;
-
     @Column(length = 50)
     private String name;
     @Column(length = 50)
     private String email;
-    private Date birthDay;
+    private LocalDate birthDay;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -28,7 +27,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, String email, Date birthDay) {
+    public User(String name, String email, LocalDate birthDay) {
         this.name = name;
         this.email = email;
         this.birthDay = birthDay;
@@ -58,11 +57,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 
