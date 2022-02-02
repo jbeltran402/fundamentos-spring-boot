@@ -48,6 +48,5 @@ public class FundamentosApplication implements CommandLineRunner {
         } catch (Exception e) {
             LOGGER.error("Esto es un error en la suma, se esta dividiendo por cero " + e.getStackTrace());
         }
-        /* TODO -> generar mis propios Logs en los archivos que tengo*/
     }
 }
