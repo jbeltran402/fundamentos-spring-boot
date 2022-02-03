@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-
 @SpringBootApplication
 public class FundamentosApplication implements CommandLineRunner {
 
@@ -47,16 +46,26 @@ public class FundamentosApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try{
+            //EjemplosAnteriores();
             SaveUsersInDataBase();
-            LOGGER.info("-->Corriendo correctamente<--");
+            getInformationJpqlFromUser();
+            LOGGER.info("-> Corriendo correctamente <-");
         }catch (Exception e){
             LOGGER.error("ERROR -> "+ Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    private void getInformationJpqlFromUser(){
+        try{
+            LOGGER.info("Usuario -> "+userRepository.findByUserEmail("noExiste@email.com")
+                    .orElseThrow(() -> new RuntimeException("-> Usuario No Encontrado")));
+        }catch (Exception e){
+            LOGGER.error(e.getMessage());
         }
 
     }
 
     private void SaveUsersInDataBase(){
-
         User user1 = new User("juan","juan@email.com", LocalDate.of(2000,2,2));
         User user2 = new User("henry","henry@email.com", LocalDate.of(2000,3,2));
         User user3 = new User("camilo","camilo@email.com", LocalDate.of(1999,4,2));
