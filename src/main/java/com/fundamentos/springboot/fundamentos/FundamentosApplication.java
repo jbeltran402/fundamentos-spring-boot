@@ -47,7 +47,7 @@ public class FundamentosApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try{
-            //EjemplosAnteriores();
+            EjemplosAnteriores();
             SaveUsersInDataBase();
             getInformationJpqlFromUser();
             LOGGER.info("-> Corriendo correctamente <-");
