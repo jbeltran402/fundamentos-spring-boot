@@ -71,6 +71,8 @@ public class FundamentosApplication implements CommandLineRunner {
         userRepository.findByNameOrEmail("henry", null).forEach(user -> LOGGER.info("Usuario encontrado por nombre o Email "+user));
         userRepository.findBybirthDayBetween(LocalDate.of(2021, 1, 1), LocalDate.of(2021 , 9, 3)).
                 forEach(user -> LOGGER.info("Usuario con intevalo de fechas "+ user));
+        userRepository.findByNameLikeOrderByIdDesc("%he%").forEach(user -> LOGGER.info("Encontrar usuario con Like y ordenarlo "+user));
+        userRepository.findByNameContainingOrderByIdDesc("ma").forEach(user -> LOGGER.info("Encontrar usuario con Containing y ordenarlo "+user));
     }
 
 
@@ -86,9 +88,9 @@ public class FundamentosApplication implements CommandLineRunner {
         User user9 = new User("gabriela","gabriela@email.com", LocalDate.of(2000,10,2));
         User user10 = new User("antonia","antonia@email.com", LocalDate.of(2001,11,2));
         User user11 = new User("John", "john@domain.com", LocalDate.of(2021, 3, 13));
-        User user12 = new User("Marco", "marco@domain.com", LocalDate.of(2021, 12, 8));
+        User user12 = new User("marco", "marco@domain.com", LocalDate.of(2021, 12, 8));
         User user13 = new User("Daniela", "daniela@domain.com", LocalDate.of(2021, 9, 8));
-        User user14 = new User("Marisol", "marisol@domain.com", LocalDate.of(2021, 6, 18));
+        User user14 = new User("marisol", "marisol@domain.com", LocalDate.of(2021, 6, 18));
         User user15 = new User("Karen", "karen@domain.com", LocalDate.of(2021, 1, 1));
         User user16 = new User("Carlos", "carlos@domain.com", LocalDate.of(2021, 7, 7));
         User user17 = new User("Enrique", "enrique@domain.com", LocalDate.of(2021, 11, 12));
