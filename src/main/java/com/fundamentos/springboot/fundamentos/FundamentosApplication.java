@@ -34,7 +34,7 @@ public class FundamentosApplication implements CommandLineRunner {
     private UserPojo userPojo;
     private UserRepository userRepository;
 
-    public FundamentosApplication(@Qualifier("componentTowImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, ExercicePrintWithDependencyImplement exercicePrintWithDependencyImplement, MyBeanWithProperties myBeanWithProperties, UserPojo userPojo) {
+    public FundamentosApplication(@Qualifier("componentTowImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, MyBeanWithProperties myBeanWithProperties, UserPojo userPojo, UserRepository userRepository, ExercicePrintWithDependencyImplement exercicePrintWithDependencyImplement) {
 
         this.componentDependency = componentDependency;
         this.myBean = myBean;
@@ -78,6 +78,8 @@ public class FundamentosApplication implements CommandLineRunner {
                 forEach(user -> LOGGER.info("Usuario con intevalo de fechas "+ user));
         userRepository.findByNameLikeOrderByIdDesc("%he%").forEach(user -> LOGGER.info("Encontrar usuario con Like y ordenarlo "+user));
         userRepository.findByNameContainingOrderByIdDesc("ma").forEach(user -> LOGGER.info("Encontrar usuario con Containing y ordenarlo "+user));
+
+        /* TODO -> (QueryMethods -> QM ) -> Crear mi propio QM para BUSCAR a partir de otros parametros, ORDENAR de forma descendente o ascendente y utilizar las sentencias OR,AND,LIKE etc... */
     }
 
 
