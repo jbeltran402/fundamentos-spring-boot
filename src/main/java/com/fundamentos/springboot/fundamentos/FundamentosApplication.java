@@ -52,19 +52,23 @@ public class FundamentosApplication implements CommandLineRunner {
             getInformationJpqlFromUser();
             LOGGER.info("-> Corriendo correctamente <-");
         }catch (Exception e){
-            LOGGER.error("ERROR -> "+ Arrays.toString(e.getStackTrace()));
+            LOGGER.error("ERROR en run -> "+ Arrays.toString(e.getStackTrace()));
         }
     }
 
-    private void getInformationJpqlFromUser(){
-        try{
-            LOGGER.info("Usuario -> "+userRepository.findByUserEmail("juan@email.com")
+    private void getInformationJpqlFromUser() {
+        try {
+            LOGGER.info("Usuario -> " + userRepository.findByUserEmail("juan@email.com")
                     .orElseThrow(() -> new RuntimeException("-> Usuario No Encontrado")));
-        }catch (Exception e){
+            LOGGER.info("Email + Nombre ->" + userRepository.findByEmailAndName("sebastian", "n@email.com")
+                    .orElseThrow(() -> new RuntimeException("-> usuario no encontrado por nombre y Email")));
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
-        userRepository.findAndSort("M", Sort.by("id").descending()).forEach(user -> LOGGER.info("Usuario con el metodo Sort(Ordenar) "+user));
+        userRepository.findAndSort("M", Sort.by("id").descending()).forEach(user -> LOGGER.info("Usuario con el metodo Sort(Ordenar) " + user));
+        userRepository.findByName("Maria").forEach(user -> LOGGER.info("Usuario capturado con Query Method " + user));
     }
+
 
     private void SaveUsersInDataBase(){
         User user1 = new User("juan","juan@email.com", LocalDate.of(2000,2,2));
