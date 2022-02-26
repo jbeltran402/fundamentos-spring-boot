@@ -1,6 +1,7 @@
 package com.fundamentos.springboot.fundamentos.configuration;
 
 import com.fundamentos.springboot.fundamentos.bean.*;
+import com.fundamentos.springboot.fundamentos.pojo.UserPojo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,5 +20,15 @@ public class MyConfigurationBean {
     @Bean
     public MyBeanWithDependency beanOperationSumReturnWithDependency(MyOperation myOperation){
         return new MyBeanWithDependencyImplement(myOperation);
+    }
+
+    @Bean
+    public ExerciceDependency beanSaludo(){
+        return new ExeciceDependencyImplement();
+    }
+
+    @Bean
+    public ExercicePrintWithDependencyImplement exerciceDependencyprint(ExerciceDependency exerciceDependency, UserPojo userPojo){
+        return new ExercicePrintWithDependencyImplement(exerciceDependency, userPojo);
     }
 }

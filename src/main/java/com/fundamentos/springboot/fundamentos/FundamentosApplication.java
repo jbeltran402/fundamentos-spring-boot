@@ -3,6 +3,8 @@ package com.fundamentos.springboot.fundamentos;
 import com.fundamentos.springboot.fundamentos.bean.MyBean;
 import com.fundamentos.springboot.fundamentos.bean.MyBeanWithDependency;
 import com.fundamentos.springboot.fundamentos.bean.MyBeanWithProperties;
+import com.fundamentos.springboot.fundamentos.bean.*;
+
 import com.fundamentos.springboot.fundamentos.component.ComponentDependency;
 import com.fundamentos.springboot.fundamentos.entity.User;
 import com.fundamentos.springboot.fundamentos.pojo.UserPojo;
@@ -27,14 +29,17 @@ public class FundamentosApplication implements CommandLineRunner {
     private ComponentDependency componentDependency;
     private MyBean myBean;
     private MyBeanWithDependency myBeanWithDependency;
+    private ExercicePrintWithDependencyImplement exercicePrintWithDependencyImplement;
     private MyBeanWithProperties myBeanWithProperties;
     private UserPojo userPojo;
     private UserRepository userRepository;
 
-    public FundamentosApplication(@Qualifier("componentTowImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, MyBeanWithProperties myBeanWithProperties, UserPojo userPojo, UserRepository userRepository) {
+    public FundamentosApplication(@Qualifier("componentTowImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, ExercicePrintWithDependencyImplement exercicePrintWithDependencyImplement, MyBeanWithProperties myBeanWithProperties, UserPojo userPojo) {
+
         this.componentDependency = componentDependency;
         this.myBean = myBean;
         this.myBeanWithDependency = myBeanWithDependency;
+        this.exercicePrintWithDependencyImplement = exercicePrintWithDependencyImplement;
         this.myBeanWithProperties = myBeanWithProperties;
         this.userPojo = userPojo;
         this.userRepository = userRepository;
@@ -105,8 +110,11 @@ public class FundamentosApplication implements CommandLineRunner {
         componentDependency.HolaMundo();
         myBean.print();
         myBeanWithDependency.printWhithDependency();
+        exercicePrintWithDependencyImplement.PrintExerciceDependency();
         System.out.println(myBeanWithProperties.function());
         System.out.println(userPojo.getEmail());
+            LOGGER.debug("La variable Email Contiene :" + userPojo.getEmail());
+
         try {
             int VariableError = 10 / 0;
             LOGGER.debug("El resultado es :" + VariableError);
