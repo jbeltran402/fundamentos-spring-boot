@@ -24,4 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findBybirthDayBetween(LocalDate begin, LocalDate end);
     List<User> findByNameLikeOrderByIdDesc(String Name);
     List<User> findByNameContainingOrderByIdDesc(String Name);
+    List<User> findBybirthDayGreaterThan (LocalDate date);
+    List<User> findBybirthDayGreaterThanEqualOrderByIdDesc (LocalDate date);
+    List<User> findByNameIgnoreCase (String Name);
 }

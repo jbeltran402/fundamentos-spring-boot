@@ -78,10 +78,12 @@ public class FundamentosApplication implements CommandLineRunner {
                 forEach(user -> LOGGER.info("Usuario con intevalo de fechas "+ user));
         userRepository.findByNameLikeOrderByIdDesc("%he%").forEach(user -> LOGGER.info("Encontrar usuario con Like y ordenarlo "+user));
         userRepository.findByNameContainingOrderByIdDesc("ma").forEach(user -> LOGGER.info("Encontrar usuario con Containing y ordenarlo "+user));
-
         /* TODO -> (QueryMethods -> QM ) -> Crear mi propio QM para BUSCAR a partir de otros parametros, ORDENAR de forma descendente o ascendente y utilizar las sentencias OR,AND,LIKE etc... */
-    }
+        userRepository.findBybirthDayGreaterThan(LocalDate.of(2000,2,2)).forEach(user -> LOGGER.info("Encontrar usuarios difelentes al actual "+user));
+        userRepository.findBybirthDayGreaterThanEqualOrderByIdDesc(LocalDate.of(2021, 2, 27)).forEach(user -> LOGGER.info("Encontrar usuarios diferentes o iguales al actual "+user));
+        userRepository.findByNameIgnoreCase("luisa").forEach(user -> LOGGER.info("Encontar Usuarios ignorando si es mayuscula o minuscula "+user));
 
+    }
 
     private void SaveUsersInDataBase(){
         User user1 = new User("juan","juan@email.com", LocalDate.of(2000,2,2));
@@ -101,7 +103,7 @@ public class FundamentosApplication implements CommandLineRunner {
         User user15 = new User("Karen", "karen@domain.com", LocalDate.of(2021, 1, 1));
         User user16 = new User("Carlos", "carlos@domain.com", LocalDate.of(2021, 7, 7));
         User user17 = new User("Enrique", "enrique@domain.com", LocalDate.of(2021, 11, 12));
-        User user18 = new User("Luis", "luis@domain.com", LocalDate.of(2021, 2, 27));
+        User user18 = new User("Luisa", "luisa@domain.com", LocalDate.of(2021, 2, 27));
         User user19 = new User("Paola", "paola@domain.com", LocalDate.of(2021, 4, 10));
 
         List<User> list = Arrays.asList(user1,user2,user3,user4,user5,user6,user7,user8,user9,user10,user11,user12,user13,user14,user15,user16,user17,user18,user19);
