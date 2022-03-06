@@ -73,8 +73,10 @@ public class FundamentosApplication implements CommandLineRunner {
                 forEach(user -> LOGGER.info("Usuario con intevalo de fechas "+ user));
         userRepository.findByNameLikeOrderByIdDesc("%he%").forEach(user -> LOGGER.info("Encontrar usuario con Like y ordenarlo "+user));
         userRepository.findByNameContainingOrderByIdDesc("ma").forEach(user -> LOGGER.info("Encontrar usuario con Containing y ordenarlo "+user));
-    }
+        LOGGER.info("El usuario encontrado por named patameter es -> " + userRepository.getAllByBirthDateAndEmail(LocalDate.of(2000,2,2),"juan@email.com")
+                .orElseThrow(() -> new RuntimeException("-> No se encontro el usuario a partir del named parameters")));
 
+    }
 
     private void SaveUsersInDataBase(){
         User user1 = new User("juan","juan@email.com", LocalDate.of(2000,2,2));
