@@ -7,6 +7,7 @@ import com.fundamentos.springboot.fundamentos.component.ComponentDependency;
 import com.fundamentos.springboot.fundamentos.entity.User;
 import com.fundamentos.springboot.fundamentos.pojo.UserPojo;
 import com.fundamentos.springboot.fundamentos.repository.UserRepository;
+import com.fundamentos.springboot.fundamentos.service.UserService;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,14 +31,16 @@ public class FundamentosApplication implements CommandLineRunner {
     private MyBeanWithProperties myBeanWithProperties;
     private UserPojo userPojo;
     private UserRepository userRepository;
+    private UserService userService;
 
-    public FundamentosApplication(@Qualifier("componentTowImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, MyBeanWithProperties myBeanWithProperties, UserPojo userPojo, UserRepository userRepository) {
+    public FundamentosApplication(@Qualifier("componentTowImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, MyBeanWithProperties myBeanWithProperties, UserPojo userPojo, UserRepository userRepository, UserService userService) {
         this.componentDependency = componentDependency;
         this.myBean = myBean;
         this.myBeanWithDependency = myBeanWithDependency;
         this.myBeanWithProperties = myBeanWithProperties;
         this.userPojo = userPojo;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public static void main(String[] args) {
@@ -50,10 +53,28 @@ public class FundamentosApplication implements CommandLineRunner {
             EjemplosAnteriores();
             SaveUsersInDataBase();
             getInformationJpqlFromUser();
+            saveWithErrorTransactional();
             LOGGER.info("-> Corriendo correctamente <-");
         }catch (Exception e){
             LOGGER.error("ERROR en run -> "+ Arrays.toString(e.getStackTrace()));
         }
+    }
+
+    private void saveWithErrorTransactional(){
+        User test1 = new User("user1transactional", "Test1transactional@Email.com", LocalDate.now());
+        User test2 = new User("user2transactional", "Test2transactional@Email.com", LocalDate.now());
+        User test3 = new User("user3transactional", "Test1transactional@Email.com", LocalDate.now());
+        User test4 = new User("user4transactional", "Test4transactional@Email.com", LocalDate.now());
+
+        List<User> users = Arrays.asList(test1,test2,test3,test4);
+        try {
+            userService.saveTransactional(users);
+        }catch (Exception e){
+            LOGGER.error("Error al insertar los valores a la BD (Transactional) ->" + e);
+        }
+        userService.getAllUsers()
+                .forEach(user ->
+                        LOGGER.info("Este es el usuario dentro del metodo transaccional" + user));
     }
 
     private void getInformationJpqlFromUser() {
