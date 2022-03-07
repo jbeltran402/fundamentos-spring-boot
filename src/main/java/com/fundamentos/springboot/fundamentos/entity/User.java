@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
 @Table(name="users")
 public class User {
     @Id
@@ -32,6 +33,8 @@ public class User {
         this.email = email;
         this.birthDay = birthDay;
     }
+
+    public User(Long id) { this.id = id; }
 
     public Long getId() {
         return id;
